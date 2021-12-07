@@ -12,24 +12,34 @@ import {
   Heading,
   IconButton,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState('')
-  const [searchResults, setSearchResults] = useState(null)
+  const [searchResults, setSearchResults] = useState([])
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
-  const errorColor = useColorModeValue('red.500', 'red.300')
+  const toast = useToast()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
+    
     const bhbRes = await fetch(`/api/bhb-songs?q=${searchValue}`)
+    const bhbResJSON = await bhbRes.json()
 
-    const results = await bhbRes.json()
-    console.log(results)
-    setSearchResults(results)
+    if (bhbResJSON.status === 'success') {
+      setSearchResults(bhbResJSON)
+    } else {
+      toast({
+        title: 'Error',
+        description: bhbResJSON.results,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      })
+    }
   }
 
   return (
@@ -73,31 +83,25 @@ const Home = () => {
         </Flex>
       </form>
       <VStack my={20} spacing={14}>
-        {searchResults !== null &&
-          (searchResults.length <= 0 ? (
-            <Text color={errorColor} fontSize="2rem" fontWeight={500}>
-              No results... :(
-            </Text>
-          ) : (
-            searchResults[0].verses.map((verse, i) => {
-              return (
-                <VStack key={i}>
-                  {verse.map((line, j) => {
-                    return (
-                      <VStack key={j}>
-                        <Text
-                          color={primaryColor}
-                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
-                        >
-                          {line}
-                        </Text>
-                      </VStack>
-                    )
-                  })}
-                </VStack>
-              )
-            })
-          ))}
+        {searchResults.status === 'success' &&
+          searchResults.results[0].verses.map((verse, i) => {
+            return (
+              <VStack key={i}>
+                {verse.map((line, j) => {
+                  return (
+                    <VStack key={j}>
+                      <Text
+                        color={primaryColor}
+                        fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                      >
+                        {line}
+                      </Text>
+                    </VStack>
+                  )
+                })}
+              </VStack>
+            )
+          })}
       </VStack>
     </Box>
   )
