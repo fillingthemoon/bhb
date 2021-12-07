@@ -18,18 +18,18 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 
 const links = [
-  {
-    name: 'Home',
-    href: '/',
-  },
-  {
-    name: 'Menu Item',
-    href: '/menu-item',
-    submenu: [
-      { name: 'Submenu Item 1', href: '/submenu-item-1' },
-      { name: 'Submenu Item 2?', href: '/submenu-item-2' },
-    ],
-  },
+  // {
+  //   name: 'Home',
+  //   href: '/',
+  // },
+  // {
+  //   name: 'Menu Item',
+  //   href: '/menu-item',
+  //   submenu: [
+  //     { name: 'Submenu Item 1', href: '/submenu-item-1' },
+  //     { name: 'Submenu Item 2?', href: '/submenu-item-2' },
+  //   ],
+  // },
 ]
 
 const NavBar = () => {
