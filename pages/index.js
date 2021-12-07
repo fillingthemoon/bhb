@@ -50,7 +50,7 @@ const Home = () => {
         <Flex justify="center">
           <Input
             maxW="400px"
-            placeholder="Enter a phrase or hymn number"
+            placeholder="Enter a phrase or hymn #"
             value={searchValue}
             color={primaryColor}
             fontWeight={500}
