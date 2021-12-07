@@ -4,43 +4,36 @@ import Head from 'next/head'
 import {
   useColorMode,
   useColorModeValue,
-  Container,
-  Stack,
+  Box,
+  VStack,
   Flex,
   Input,
   Button,
   Heading,
   IconButton,
+  Text,
 } from '@chakra-ui/react'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [searchResults, setSearchResults] = useState(null)
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
+  const errorColor = useColorModeValue('red.500', 'red.300')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const bhbRes = await fetch(
-      '/api/bhb-songs',
-      {
-        body: JSON.stringify({
-          name: event.currentTarget.value,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'GET',
-      }
-    )
+    const bhbRes = await fetch(`/api/bhb-songs?q=${searchValue}`)
 
-    const result = await bhbRes.json()
-    console.log(result)
+    const results = await bhbRes.json()
+    console.log(results)
+    setSearchResults(results)
   }
 
   return (
-    <Container maxW="container.md">
+    <Box>
       <Head>
         <title>Believers Hymn Book</title>
       </Head>
@@ -79,13 +72,34 @@ const Home = () => {
           </Button>
         </Flex>
       </form>
-      <Stack
-        fontSize="lg"
-        spacing={8}
-        textAlign="justify"
-        lineHeight="8"
-      ></Stack>
-    </Container>
+      <VStack my={20} spacing={14}>
+        {searchResults !== null &&
+          (searchResults.length <= 0 ? (
+            <Text color={errorColor} fontSize="2rem" fontWeight={500}>
+              No results... :(
+            </Text>
+          ) : (
+            searchResults[0].verses.map((verse, i) => {
+              return (
+                <VStack key={i}>
+                  {verse.map((line, j) => {
+                    return (
+                      <VStack key={j}>
+                        <Text
+                          color={primaryColor}
+                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                        >
+                          {line}
+                        </Text>
+                      </VStack>
+                    )
+                  })}
+                </VStack>
+              )
+            })
+          ))}
+      </VStack>
+    </Box>
   )
 }
 
