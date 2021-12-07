@@ -122,6 +122,13 @@ const Home = () => {
                   p={6}
                   borderRadius="10px"
                   shadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+                  onClick={() => setSearchResults([hymn])}
+                  cursor="pointer"
+                  transition="0.2s"
+                  _hover={{
+                    transform: 'scale(1.05)',
+                    transition: '0.2s',
+                  }}
                 >
                   <Text
                     color={primaryColor}
@@ -135,7 +142,7 @@ const Home = () => {
                     textAlign="center"
                     mb={4}
                   >
-                    ...
+                    &#8230;
                   </Text>
                   {(() => {
                     let found = false
@@ -178,7 +185,7 @@ const Home = () => {
                     textAlign="center"
                     mb={4}
                   >
-                    ...
+                    &#8230;
                   </Text>
                 </Flex>
               )
