@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         searchValue: searchQuery,
         results: 'No results :(',
       })
-    } else if (searchResults.length > 10) {
+    } else if (searchResults.length > 20) {
       return res.status(200).json({
         status: 'error',
         searchValue: searchQuery,
