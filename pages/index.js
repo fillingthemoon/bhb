@@ -121,6 +121,7 @@ const Home = () => {
                         key={j}
                         color={primaryColor}
                         fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                        textAlign="center"
                       >
                         {line}
                       </Text>
