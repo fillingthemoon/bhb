@@ -119,11 +119,24 @@ const Home = () => {
                   flexDirection="column"
                   key={i}
                   m={4}
-                  p={4}
-                  border="1px solid"
+                  p={6}
                   borderRadius="10px"
-                  borderColor={primaryColor}
+                  shadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
                 >
+                  <Text
+                    color={primaryColor}
+                    fontWeight={700}
+                    textAlign="center"
+                    mb={4}
+                  >{`Hymn ${hymn.id}`}</Text>
+                  <Text
+                    color={primaryColor}
+                    fontWeight={700}
+                    textAlign="center"
+                    mb={4}
+                  >
+                    ...
+                  </Text>
                   {(() => {
                     let found = false
                     for (const verse = 0; verse < hymn.verses.length; verse++) {
@@ -135,7 +148,7 @@ const Home = () => {
                         if (
                           hymn.verses[verse][line]
                             .toLowerCase()
-                            .includes(searchValue.toLowerCase())
+                            .includes(searchResults.searchValue.toLowerCase())
                         ) {
                           found = verse
                           break
@@ -159,6 +172,14 @@ const Home = () => {
                       )
                     })
                   })()}
+                  <Text
+                    color={primaryColor}
+                    fontWeight={700}
+                    textAlign="center"
+                    mb={4}
+                  >
+                    ...
+                  </Text>
                 </Flex>
               )
             })}

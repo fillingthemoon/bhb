@@ -20,14 +20,25 @@ export default async function handler(req, res) {
     }
 
     if (searchResults.length <= 0) {
-      return res.status(200).json({ status: 'error', results: 'No results :(' })
+      return res.status(200).json({
+        status: 'error',
+        searchValue: searchQuery,
+        results: 'No results :(',
+      })
     } else if (searchResults.length > 10) {
       return res.status(200).json({
         status: 'error',
+        searchValue: searchQuery,
         results: 'Too many results. Please narrow down your search.',
       })
     }
 
-    return res.status(200).json({ status: 'success', results: searchResults })
+    return res
+      .status(200)
+      .json({
+        status: 'success',
+        searchValue: searchQuery,
+        results: searchResults,
+      })
   }
 }
