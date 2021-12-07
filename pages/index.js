@@ -96,7 +96,7 @@ const Home = () => {
               </Heading>
               <Text
                 textAlign="center"
-                fontSize="1rem"
+                fontSize={{ base: '1rem', md: '1.2rem' }}
                 color={primaryColor}
                 fontStyle="italic"
               >
@@ -104,7 +104,7 @@ const Home = () => {
               </Text>
               <Text
                 textAlign="center"
-                fontSize="1rem"
+                fontSize={{ base: '1rem', md: '1.2rem' }}
                 color={primaryColor}
               >
                 {`by ${searchResults.results[0].author}`}
