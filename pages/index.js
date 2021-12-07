@@ -26,6 +26,8 @@ const Home = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    setSearchResults([])
+
     const bhbRes = await fetch(`/api/bhb-hymns?q=${searchValue}`)
     const bhbResJSON = await bhbRes.json()
 
