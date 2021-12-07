@@ -41,6 +41,7 @@ const Home = () => {
           position={{ md: 'absolute' }}
           top={{ md: 10 }}
           left={{ md: 10 }}
+          borderRadius="50%"
         />
         <Heading textAlign="center" fontSize="1.4rem" color={primaryColor}>
           Believers Hymn Book
