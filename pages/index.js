@@ -19,8 +19,24 @@ const Home = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const bhbRes = await fetch(
+      '/api/bhb-songs',
+      {
+        body: JSON.stringify({
+          name: event.currentTarget.value,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      }
+    )
+
+    const result = await bhbRes.json()
+    console.log(result)
   }
 
   return (
