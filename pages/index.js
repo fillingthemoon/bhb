@@ -112,6 +112,8 @@ const Home = () => {
             })}
           </VStack>
         ) : (
+
+          // Multiple (> 1) Results
           <Flex my={20} flexWrap="wrap" justify="center">
             {searchResults.results.map((hymn, i) => {
               return (
