@@ -5,7 +5,8 @@ const gray = '#828282'
 const grayD = '#4f4f4f'
 const white = '#ffffff'
 
-const primary = '#0d47a1'
+const primary = '#004e98'
+const primaryDarkMode = '#9ed0ff'
 const red = '#e5383b'
 const orange = '#ff8000'
 const yellow = '#fcba03'
@@ -22,6 +23,7 @@ export {
   white,
 
   primary,
+  primaryDarkMode,
   red,
   orange,
   yellow,

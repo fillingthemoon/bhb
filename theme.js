@@ -1,8 +1,12 @@
 import { extendTheme } from '@chakra-ui/react'
 
-import { black, grayD, gray, grayL, primary, red, yellow, green, blue } from './helper-files/colors'
+import { black, grayD, gray, grayL, white, primary, primaryDarkMode, red, yellow, green, blue } from './helper-files/colors'
 
 const theme = extendTheme({
+  config: {
+    initialColorMode: 'light',
+  useSystemColorMode: false,
+  },
   styles: {
     global: {
       body: {
@@ -12,6 +16,7 @@ const theme = extendTheme({
   },
   colors: {
     primary: {
+      200: primaryDarkMode,
       500: primary,
     },
     black: {
@@ -26,6 +31,9 @@ const theme = extendTheme({
     grayD: {
       500: grayD,
     },
+    white: {
+      500: white,
+    },
     red: {
       500: red,
     },
@@ -37,12 +45,6 @@ const theme = extendTheme({
     },
     blue: {
       500: blue,
-    },
-    returnBtn: {
-      500: red,
-    },
-    feedbackBtn: {
-      500: black,
     },
   },
   fonts: {

@@ -1,4 +1,5 @@
 import {
+  useColorModeValue,
   Box,
   VStack,
   Container,
@@ -6,11 +7,15 @@ import {
 } from '@chakra-ui/react'
 
 const Footer = () => {
+  const primaryColor = useColorModeValue('primary.500', 'primary.200')
+
   return (
     <Box py={8}>
       <Container maxW="container.xl">
         <VStack spacing={2}>
-          <Text>&copy; 2021 Believers Hymn Book.</Text>
+          <Text color={primaryColor}>
+            &copy; 2021 Believers Hymn Book.
+          </Text>
         </VStack>
       </Container>
     </Box>

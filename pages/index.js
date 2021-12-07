@@ -1,21 +1,26 @@
+import { useState } from 'react'
+
 import Head from 'next/head'
 import {
+  useColorMode,
+  useColorModeValue,
   Container,
-  Heading,
   Stack,
   Flex,
   Input,
   Button,
+  Heading,
+  IconButton,
 } from '@chakra-ui/react'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 
 const Home = () => {
-  const onSubmit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        resolve()
-      }, 3000)
-    })
+  const [searchValue, setSearchValue] = useState('')
+  const { colorMode, toggleColorMode } = useColorMode()
+  const primaryColor = useColorModeValue('primary.500', 'primary.200')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
   }
 
   return (
@@ -23,14 +28,37 @@ const Home = () => {
       <Head>
         <title>Believers Hymn Book</title>
       </Head>
-      <Heading textAlign="center" mb="16" fontSize="3rem">
-        Home
-      </Heading>
-      <form>
+      <Flex
+        mt={{ md: 6 }}
+        mb={14}
+        justify={{ base: 'space-between', md: 'center' }}
+        align="center"
+      >
+        <IconButton
+          onClick={toggleColorMode}
+          colorScheme={colorMode === 'light' ? 'black' : 'yellow'}
+          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          position={{ md: 'absolute' }}
+          top={{ md: 10 }}
+          left={{ md: 10 }}
+        />
+        <Heading textAlign="center" fontSize="1.4rem" color={primaryColor}>
+          Believers Hymn Book
+        </Heading>
+      </Flex>
+      <form onSubmit={handleSubmit}>
         <Flex justify="center">
-          <Input maxW='400px' placeholder="Enter a phrase or hymn number" />
-          <Button ml={4} colorScheme="primary" type="submit">
-            Submit
+          <Input
+            maxW="400px"
+            placeholder="Enter a phrase or hymn number"
+            value={searchValue}
+            color={primaryColor}
+            fontWeight={500}
+            onChange={(event) => setSearchValue(event.currentTarget.value)}
+            focusBorderColor={primaryColor}
+          />
+          <Button ml={4} colorScheme={'primary'} type="submit">
+            Search
           </Button>
         </Flex>
       </form>
