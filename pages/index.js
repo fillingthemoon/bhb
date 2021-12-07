@@ -25,7 +25,7 @@ const Home = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    
+
     const bhbRes = await fetch(`/api/bhb-songs?q=${searchValue}`)
     const bhbResJSON = await bhbRes.json()
 
@@ -82,27 +82,53 @@ const Home = () => {
           </Button>
         </Flex>
       </form>
-      <VStack my={20} spacing={14}>
-        {searchResults.status === 'success' &&
-          searchResults.results[0].verses.map((verse, i) => {
-            return (
-              <VStack key={i}>
-                {verse.map((line, j) => {
-                  return (
-                    <VStack key={j}>
-                      <Text
-                        color={primaryColor}
-                        fontSize={{ base: '1.1rem', md: '1.5rem' }}
-                      >
-                        {line}
-                      </Text>
-                    </VStack>
-                  )
-                })}
-              </VStack>
-            )
-          })}
-      </VStack>
+      {searchResults.status === 'success' &&
+        (searchResults.results.length <= 1 ? (
+          <VStack my={20} spacing={14}>
+            <Heading textAlign="center" fontSize="1.6rem" color={primaryColor} mb={4}>
+              {`Hymn #${searchResults.results[0].id}`}
+            </Heading>
+            {searchResults.results[0].verses.map((verse, i) => {
+              return (
+                <VStack key={i}>
+                  {verse.map((line, j) => {
+                    return (
+                      <VStack key={j}>
+                        <Text
+                          color={primaryColor}
+                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                        >
+                          {line}
+                        </Text>
+                      </VStack>
+                    )
+                  })}
+                </VStack>
+              )
+            })}
+          </VStack>
+        ) : (
+          <VStack my={20} spacing={14}>
+            {searchResults.results[0].verses.map((verse, i) => {
+              return (
+                <VStack key={i}>
+                  {verse.map((line, j) => {
+                    return (
+                      <VStack key={j}>
+                        <Text
+                          color={primaryColor}
+                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                        >
+                          {line}
+                        </Text>
+                      </VStack>
+                    )
+                  })}
+                </VStack>
+              )
+            })}
+          </VStack>
+        ))}
     </Box>
   )
 }
