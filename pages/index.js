@@ -85,14 +85,31 @@ const Home = () => {
       {searchResults.status === 'success' &&
         (searchResults.results.length <= 1 ? (
           <VStack my={20} spacing={14}>
-            <Heading
-              textAlign="center"
-              fontSize="1.6rem"
-              color={primaryColor}
-              mb={4}
-            >
-              {`Hymn No. ${searchResults.results[0].id}`}
-            </Heading>
+            <Flex flexDirection="column" mb={4}>
+              <Heading
+                textAlign="center"
+                fontSize="1.6rem"
+                color={primaryColor}
+                mb={2}
+              >
+                {`Hymn No. ${searchResults.results[0].id}`}
+              </Heading>
+              <Text
+                textAlign="center"
+                fontSize="1rem"
+                color={primaryColor}
+                fontStyle="italic"
+              >
+                {`${searchResults.results[0].title}`}
+              </Text>
+              <Text
+                textAlign="center"
+                fontSize="1rem"
+                color={primaryColor}
+              >
+                {`by ${searchResults.results[0].author}`}
+              </Text>
+            </Flex>
             {searchResults.results[0].verses.map((verse, i) => {
               return (
                 <VStack key={i}>
@@ -112,7 +129,6 @@ const Home = () => {
             })}
           </VStack>
         ) : (
-
           // Multiple (> 1) Results
           <Flex my={20} flexWrap="wrap" justify="center">
             {searchResults.results.map((hymn, i) => {
