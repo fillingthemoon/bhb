@@ -1,4 +1,4 @@
-import bhbSongs from './bhb-songs.json'
+import bhbHymns from './bhb-hymns.json'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -6,12 +6,12 @@ export default async function handler(req, res) {
     let searchResults = []
 
     if (Number.isInteger(parseInt(searchQuery))) {
-      searchResults = bhbSongs.filter((song) => {
-        return song.id == searchQuery
+      searchResults = bhbHymns.filter((hymn) => {
+        return hymn.id == searchQuery
       })
     } else {
-      searchResults = bhbSongs.filter((song) => {
-        return song.verses.some((verse) => {
+      searchResults = bhbHymns.filter((hymn) => {
+        return hymn.verses.some((verse) => {
           return verse.some((line) => {
             return line.toLowerCase().includes(searchQuery.toLowerCase())
           })

@@ -26,7 +26,7 @@ const Home = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const bhbRes = await fetch(`/api/bhb-songs?q=${searchValue}`)
+    const bhbRes = await fetch(`/api/bhb-hymns?q=${searchValue}`)
     const bhbResJSON = await bhbRes.json()
 
     if (bhbResJSON.status === 'success') {
@@ -85,22 +85,26 @@ const Home = () => {
       {searchResults.status === 'success' &&
         (searchResults.results.length <= 1 ? (
           <VStack my={20} spacing={14}>
-            <Heading textAlign="center" fontSize="1.6rem" color={primaryColor} mb={4}>
-              {`Hymn #${searchResults.results[0].id}`}
+            <Heading
+              textAlign="center"
+              fontSize="1.6rem"
+              color={primaryColor}
+              mb={4}
+            >
+              {`Hymn No. ${searchResults.results[0].id}`}
             </Heading>
             {searchResults.results[0].verses.map((verse, i) => {
               return (
                 <VStack key={i}>
                   {verse.map((line, j) => {
                     return (
-                      <VStack key={j}>
-                        <Text
-                          color={primaryColor}
-                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
-                        >
-                          {line}
-                        </Text>
-                      </VStack>
+                      <Text
+                        key={j}
+                        color={primaryColor}
+                        fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                      >
+                        {line}
+                      </Text>
                     )
                   })}
                 </VStack>
@@ -108,26 +112,57 @@ const Home = () => {
             })}
           </VStack>
         ) : (
-          <VStack my={20} spacing={14}>
-            {searchResults.results[0].verses.map((verse, i) => {
+          <Flex my={20} flexWrap="wrap" justify="center">
+            {searchResults.results.map((hymn, i) => {
               return (
-                <VStack key={i}>
-                  {verse.map((line, j) => {
-                    return (
-                      <VStack key={j}>
+                <Flex
+                  flexDirection="column"
+                  key={i}
+                  m={4}
+                  p={4}
+                  border="1px solid"
+                  borderRadius="10px"
+                  borderColor={primaryColor}
+                >
+                  {(() => {
+                    let found = false
+                    for (const verse = 0; verse < hymn.verses.length; verse++) {
+                      for (
+                        const line = 0;
+                        line < hymn.verses[verse].length;
+                        line++
+                      ) {
+                        if (
+                          hymn.verses[verse][line]
+                            .toLowerCase()
+                            .includes(searchValue.toLowerCase())
+                        ) {
+                          found = verse
+                          break
+                        }
+                      }
+                      if (found) {
+                        break
+                      }
+                    }
+
+                    return hymn.verses[found].map((line, j) => {
+                      return (
                         <Text
+                          key={j}
+                          textAlign="center"
                           color={primaryColor}
-                          fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                          fontSize={{ base: '1rem', md: '1rem' }}
                         >
                           {line}
                         </Text>
-                      </VStack>
-                    )
-                  })}
-                </VStack>
+                      )
+                    })
+                  })()}
+                </Flex>
               )
             })}
-          </VStack>
+          </Flex>
         ))}
     </Box>
   )
