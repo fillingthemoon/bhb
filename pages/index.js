@@ -151,13 +151,14 @@ const Home = () => {
                   p={6}
                   borderRadius="10px"
                   shadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
-                  onClick={() =>
-                    setSearchResults({
+                  onClick={() => {
+                    window.scrollTo(0, 0)
+                    return setSearchResults({
                       status: 'success',
-                      searchValue: 'abba',
+                      searchValue: searchResults.searchValue,
                       results: [hymn],
                     })
-                  }
+                  }}
                   cursor="pointer"
                   transition="0.2s"
                   _hover={{
