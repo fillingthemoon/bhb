@@ -106,10 +106,18 @@ const Home = () => {
               </Text>
               <Text
                 textAlign="center"
-                fontSize={{ base: '1rem', md: '1.2rem' }}
+                fontSize={{ base: '0.8rem', md: '1rem' }}
                 color={primaryColor}
+                mb={2}
               >
                 {`by ${searchResults.results[0].author}`}
+              </Text>
+              <Text
+                textAlign="center"
+                fontSize={{ base: '0.8rem', md: '1rem' }}
+                color={primaryColor}
+              >
+                {`${searchResults.results[0].meter} | ${searchResults.results[0].tuneName}`}
               </Text>
             </Flex>
             {searchResults.results[0].verses.map((verse, i) => {
