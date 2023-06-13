@@ -14,7 +14,7 @@ const Footer = () => {
       <Container maxW="container.xl">
         <VStack spacing={2}>
           <Text color={primaryColor}>
-            &copy; 2021 Believers Hymn Book.
+            &copy;{` ${new Date().getFullYear()} Believers Hymn Book.`}
           </Text>
         </VStack>
       </Container>
