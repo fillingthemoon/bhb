@@ -20,6 +20,7 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 const Home = () => {
   const [searchValue, setSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState([])
+  const [searchIsLoading, setSearchIsLoading] = useState(false)
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
   const [songFontSize, setSongFontSize] = useState(1.5)
@@ -28,6 +29,7 @@ const Home = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    setSearchIsLoading(true)
     setSearchResults([])
 
     const bhbRes = await fetch(`/api/bhb-hymns?q=${searchValue}`)
@@ -44,6 +46,8 @@ const Home = () => {
         isClosable: true,
       })
     }
+
+    setSearchIsLoading(false)
   }
 
   const reduceSongFontSize = () => {
@@ -100,7 +104,12 @@ const Home = () => {
             onChange={(event) => setSearchValue(event.currentTarget.value)}
             focusBorderColor={primaryColor}
           />
-          <Button ml={4} colorScheme={'primary'} type="submit">
+          <Button
+            ml={4}
+            colorScheme={'primary'}
+            type="submit"
+            isLoading={searchIsLoading}
+          >
             Search
           </Button>
         </Flex>
