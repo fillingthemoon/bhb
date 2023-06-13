@@ -65,7 +65,12 @@ const Home = () => {
           borderRadius="50%"
         />
         <Heading textAlign="center" fontSize="1.4rem" color={primaryColor}>
-          Believers Hymn Book
+          <Box as="span" display={{ base: 'none', md: 'block' }}>
+            Believers Hymn Book
+          </Box>
+          <Box as="span" display={{ md: 'none' }}>
+            BHB
+          </Box>
         </Heading>
       </Flex>
       <form onSubmit={handleSubmit}>
