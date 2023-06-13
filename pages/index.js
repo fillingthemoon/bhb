@@ -6,6 +6,7 @@ import {
   useColorModeValue,
   Box,
   VStack,
+  HStack,
   Flex,
   Input,
   Button,
@@ -21,6 +22,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([])
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
+  const [songFontSize, setSongFontSize] = useState(1.6)
   const toast = useToast()
 
   const handleSubmit = async (event) => {
@@ -44,26 +46,40 @@ const Home = () => {
     }
   }
 
+  const reduceSongFontSize = () => {
+    if (songFontSize > 1.2) setSongFontSize(songFontSize - 0.1)
+  }
+
+  const increaseSongFontSize = () => {
+    if (songFontSize < 2.5) setSongFontSize(songFontSize + 0.1)
+  }
+
   return (
     <Box>
       <Head>
         <title>Believers Hymn Book</title>
       </Head>
-      <Flex
-        mt={{ md: 6 }}
-        mb={14}
-        justify={{ base: 'space-between', md: 'center' }}
-        align="center"
-      >
-        <IconButton
-          onClick={toggleColorMode}
-          colorScheme={colorMode === 'light' ? 'black' : 'yellow'}
-          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          position={{ md: 'absolute' }}
-          top={{ md: 10 }}
-          left={{ md: 10 }}
-          borderRadius="50%"
-        />
+      <Flex mb={14} justify={'space-between'} align="center">
+        <HStack spacing={6}>
+          <IconButton
+            onClick={toggleColorMode}
+            colorScheme={colorMode === 'light' ? 'black' : 'yellow'}
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            isRound={true}
+          />
+          <HStack spacing={2}>
+            <IconButton
+              onClick={reduceSongFontSize}
+              colorScheme={colorMode === 'light' ? 'black' : 'primary'}
+              icon={<Box fontSize="0.9rem">A</Box>}
+            />
+            <IconButton
+              onClick={increaseSongFontSize}
+              colorScheme={colorMode === 'light' ? 'black' : 'primary'}
+              icon={<Box fontSize="1.4rem">A</Box>}
+            />
+          </HStack>
+        </HStack>
         <Heading textAlign="center" fontSize="1.4rem" color={primaryColor}>
           <Box as="span" display={{ base: 'none', md: 'block' }}>
             Believers Hymn Book
@@ -133,7 +149,10 @@ const Home = () => {
                       <Text
                         key={j}
                         color={primaryColor}
-                        fontSize={{ base: '1.1rem', md: '1.5rem' }}
+                        fontSize={{
+                          base: `${songFontSize - 0.4}rem`,
+                          md: `${songFontSize}rem`,
+                        }}
                         textAlign="center"
                       >
                         {line}
