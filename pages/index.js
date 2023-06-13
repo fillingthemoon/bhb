@@ -64,7 +64,7 @@ const Home = () => {
         <title>Believers Hymn Book</title>
       </Head>
       <Flex mb={14} justify={'space-between'} align="center">
-        <HStack spacing={6}>
+        <HStack spacing={8}>
           <IconButton
             onClick={toggleColorMode}
             colorScheme={colorMode === 'light' ? 'black' : 'yellow'}
@@ -74,12 +74,12 @@ const Home = () => {
           <HStack spacing={2}>
             <IconButton
               onClick={reduceSongFontSize}
-              colorScheme={colorMode === 'light' ? 'black' : 'primary'}
+              colorScheme={'primary'}
               icon={<Box fontSize="0.9rem">A</Box>}
             />
             <IconButton
               onClick={increaseSongFontSize}
-              colorScheme={colorMode === 'light' ? 'black' : 'primary'}
+              colorScheme={'primary'}
               icon={<Box fontSize="1.4rem">A</Box>}
             />
           </HStack>
