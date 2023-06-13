@@ -48,8 +48,8 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    body: 'Avenir Next',
-    heading: 'Avenir Next',
+    body: 'Inter',
+    heading: 'Inter',
   },
   components: {
     Checkbox: {
