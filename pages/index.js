@@ -22,7 +22,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([])
   const { colorMode, toggleColorMode } = useColorMode()
   const primaryColor = useColorModeValue('primary.500', 'primary.200')
-  const [songFontSize, setSongFontSize] = useState(1.6)
+  const [songFontSize, setSongFontSize] = useState(1.5)
   const toast = useToast()
 
   const handleSubmit = async (event) => {
