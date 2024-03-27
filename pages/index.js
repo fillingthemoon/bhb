@@ -215,9 +215,9 @@ const Home = () => {
                   </Text>
                   {(() => {
                     let found = false
-                    for (const verse = 0; verse < hymn.verses.length; verse++) {
+                    for (let verse = 0; verse < hymn.verses.length; verse++) {
                       for (
-                        const line = 0;
+                        let line = 0;
                         line < hymn.verses[verse].length;
                         line++
                       ) {
